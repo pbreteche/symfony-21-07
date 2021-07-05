@@ -14,5 +14,6 @@ hello_named:
 hello_numbered:
     path: /hello/{id}
     controller: App\Controller\HelloController::numbered
+    methods: [GET, POST, PUT]
     requirements:
         id: \d+
