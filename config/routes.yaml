@@ -3,5 +3,16 @@ hello_index:
     controller: App\Controller\HelloController::index
 
 hello_named:
-    path: /{name}
+    path: /hello/{name}
     controller: App\Controller\HelloController::named
+    defaults:
+        name: 'tout-le-monde'
+    requirements:
+        name: '[a-zA-Z_-]+'
+
+# C'est accessible car format de paramètre distinct
+hello_numbered:
+    path: /hello/{id}
+    controller: App\Controller\HelloController::numbered
+    requirements:
+        id: \d+

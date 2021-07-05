@@ -22,4 +22,9 @@ class HelloController extends AbstractController
     {
         return new Response('Bonjour '.$name);
     }
+
+    public function numbered(int $id): Response
+    {
+        return new Response($id);
+    }
 }
