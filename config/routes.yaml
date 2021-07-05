@@ -1,3 +1,7 @@
 hello_index:
     path: /
     controller: App\Controller\HelloController::index
+
+hello_named:
+    path: /{name}
+    controller: App\Controller\HelloController::named

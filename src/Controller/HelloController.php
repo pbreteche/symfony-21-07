@@ -17,4 +17,9 @@ class HelloController extends AbstractController
 
         return $response;
     }
+
+    public function named(string $name): Response
+    {
+        return new Response('Bonjour '.$name);
+    }
 }
