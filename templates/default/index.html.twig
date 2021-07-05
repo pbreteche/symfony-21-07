@@ -5,6 +5,11 @@
 {% block body %}
     <h1>Ça marche !</h1>
     {# ce commentaire twig ne sera pas visible dans le source de la page #}
+    <ul>
+    {% for id in ids %}
+    <li><a href="{{ path('app_default_show', {id: id}) }}">Article n° {{ id }}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block stylesheets %}
