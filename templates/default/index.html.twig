@@ -6,3 +6,12 @@
     <h1>Ça marche !</h1>
     {# ce commentaire twig ne sera pas visible dans le source de la page #}
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+          color: #222;
+        }
+    </style>
+{% endblock %}
