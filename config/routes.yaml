@@ -1,5 +1,5 @@
 hello_index:
-    path: /
+    path: /hello
     controller: App\Controller\HelloController::index
 
 hello_named:
