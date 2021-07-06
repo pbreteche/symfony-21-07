@@ -94,4 +94,30 @@ class DefaultController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/{id}/remove", methods={"GET", "DELETE"})
+     */
+    public function remove(
+        Article $article,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $token = $request->request->get('token');
+        if (
+            'DELETE' === $request->getMethod() &&
+            $this->isCsrfTokenValid('delete-article', $token)
+        ) {
+            $manager->remove($article);
+            $manager->flush();
+
+            $this->addFlash('success', 'Vous avez supprimez l\'article');
+
+            return $this->redirectToRoute('app_default_index');
+        }
+
+        return $this->render('default/remove.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }

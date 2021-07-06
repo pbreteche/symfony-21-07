@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Suppression de {{ article.title }}</h1>
+
+    <form method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}"/>
+        <button type="submit">Supprimer</button>
+    </form>
+{% endblock %}
+
+{% block title %}Suppression de {{ article.title }}{% endblock %}
+
