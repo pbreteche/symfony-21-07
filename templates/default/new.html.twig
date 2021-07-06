@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{# {{ form(form) }} #}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button>Créer</button>
-    {{ form_end(form) }}
+    {{ include('default/_form.html.twig', {submit_label: 'Créer'}) }}
 {% endblock %}
