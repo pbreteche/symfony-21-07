@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>{{ article.title }}</h1>
-    <p>{{ dump(article) }}</p>
+    <p>Écrit le {{ article.createdAt | date('d/m/Y') }}</p>
+    <p>{{ article.body }}</p>
 {% endblock %}
-
-{% dump article %}

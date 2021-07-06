@@ -26,10 +26,16 @@ class DefaultController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function show(ArticleProvider $provider, int $id): Response
+    public function show(ArticleRepository $repository, int $id): Response
     {
+        $article = $repository->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render('default/show.html.twig', [
-            'article' => $provider->get($id),
+            'article' => $article,
         ]);
     }
 }
