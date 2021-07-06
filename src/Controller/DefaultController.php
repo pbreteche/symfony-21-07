@@ -75,4 +75,43 @@ class DefaultController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/{id}/edit", methods={"GET", "PUT"})
+     */
+    public function edit(
+        Article $article,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $form = $this->createFormBuilder($article, [
+            'method' => 'PUT',
+        ])
+            ->add('title')
+            ->add('body')
+            ->add('publishedAt', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'input'  => 'datetime_immutable',
+                'required' => false,
+            ])
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            $this->addFlash('success', 'Vous avez modifié votre article');
+
+            return $this->redirectToRoute('app_default_show', [
+                'id' => $article->getId(),
+            ]);
+        }
+
+        return $this->renderForm('default/edit.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }
