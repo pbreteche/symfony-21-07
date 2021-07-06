@@ -14,7 +14,17 @@
         {% endblock %}
     </head>
     <body>
-    <a href="{{ path('app_default_index') }}">Accueil</a>
+        <a href="{{ path('app_default_index') }}">Accueil</a>
+        {% block flash %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
