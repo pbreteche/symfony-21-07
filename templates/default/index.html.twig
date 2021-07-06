@@ -7,7 +7,11 @@
     {# ce commentaire twig ne sera pas visible dans le source de la page #}
     <ul>
     {% for id in ids %}
-    <li><a href="{{ path('app_default_show', {id: id}) }}">Article n° {{ id }}</a></li>
+    <li class="{{ loop.index is odd ? 'odd' : 'even' }}">
+        <a href="{{ path('app_default_show', {id: id}) }}">Article n° {{ id }}</a>
+    </li>
+    {% else %}
+    <li>Pas d'article actuellement</li>
     {% endfor %}
     </ul>
 {% endblock %}
