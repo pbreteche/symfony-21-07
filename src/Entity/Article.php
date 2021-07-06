@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -19,6 +20,8 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(min=5, max=64)
      */
     private $title;
 
@@ -29,6 +32,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Assert\GreaterThanOrEqual(value="today")
      */
     private $publishedAt;
 
@@ -88,5 +92,16 @@ class Article
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message="La date de publication doit être ultérieure à la date de création")
+     */
+    public function isPublishedAfterCreated(): bool
+    {
+        return !$this->createdAt ||
+            !$this->publishedAt  ||
+            $this->createdAt < $this->publishedAt
+        ;
     }
 }
