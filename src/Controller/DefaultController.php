@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Model\ArticleProvider;
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,14 +26,8 @@ class DefaultController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function show(ArticleRepository $repository, int $id): Response
+    public function show(Article $article): Response
     {
-        $article = $repository->find($id);
-
-        if (!$article) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('default/show.html.twig', [
             'article' => $article,
         ]);
