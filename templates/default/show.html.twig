@@ -4,4 +4,7 @@
 
 {% block body %}
     <h1>{{ article.title }}</h1>
+    <p>{{ dump(article) }}</p>
 {% endblock %}
+
+{% dump article %}
