@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{# {{ form(form) }} #}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button>Créer</button>
+    {{ form_end(form) }}
+{% endblock %}

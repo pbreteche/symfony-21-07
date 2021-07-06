@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,6 +33,46 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/show.html.twig', [
             'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/new", methods={"GET", "POST"})
+     */
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $article = new Article();
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('body')
+            ->add('publishedAt', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'input'  => 'datetime_immutable',
+                'required' => false,
+            ])
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article->setCreatedAt(new \DateTimeImmutable());
+            $manager->persist($article);
+            $manager->flush();
+
+            $this->addFlash('success', 'Vous avez créé un nouvel article');
+
+            return $this->redirectToRoute('app_default_show', [
+                'id' => $article->getId(),
+            ]);
+        }
+
+        return $this->renderForm('default/new.html.twig', [
+            'form' => $form,
         ]);
     }
 }
