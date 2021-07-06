@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Articles{% endblock %}
 
 {% block body %}
-    <h1>Ça marche !</h1>
+    <h1>Articles</h1>
     {# ce commentaire twig ne sera pas visible dans le source de la page #}
     <ul>
-    {% for id in ids %}
+    {% for article in articles %}
     <li class="{{ loop.index is odd ? 'odd' : 'even' }}">
-        <a href="{{ path('app_default_show', {id: id}) }}">Article n° {{ id }}</a>
+        <a href="{{ path('app_default_show', {id: article.id}) }}">{{ article.title }}</a>
     </li>
     {% else %}
     <li>Pas d'article actuellement</li>
