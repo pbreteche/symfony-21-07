@@ -3,12 +3,9 @@
 {% block body %}
     <h1>{{ author.name }}</h1>
     <p>{{ author.email }}</p>
-    <h2>Publications récentes</h2>
-    <ul>
-        {% for article in articles %}
-            <li><a href="{{ path('app_default_show', {id: article.id}) }}">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
+
+    {{ render(controller('App\\Controller\\DefaultController::indexLast', {author: author})) }}
+
 {% endblock %}
 
 {% block title %}{{ author.name }}{% endblock %}

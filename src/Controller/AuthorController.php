@@ -35,20 +35,10 @@ class AuthorController extends AbstractController
      * )
      */
     public function show(
-        Author $author,
-        int $page,
-        ArticleRepository $articleRepository
+        Author $author
     ): Response {
-        $articles = $articleRepository->findBy(
-            ['writtenBy' => $author],
-            ['publishedAt' => 'DESC'],
-            self::ARTICLES_LIMIT,
-            ($page - 1) * self::ARTICLES_LIMIT
-        );
-
         return $this->render('author/show.html.twig', [
             'author' => $author,
-            'articles' => $articles,
         ]);
     }
 }

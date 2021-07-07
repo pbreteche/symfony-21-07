@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Author;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -139,6 +140,18 @@ class DefaultController extends AbstractController
         $articles = $repository->findByMonth($month);
 
         return $this->render('default/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    public function indexLast(Author $author, ArticleRepository $repository): Response
+    {
+        $articles = $repository->findBy(
+            ['writtenBy' => $author],
+            ['publishedAt' => 'DESC']
+        );
+
+        return $this->render('default/index_last.html.twig', [
             'articles' => $articles,
         ]);
     }
