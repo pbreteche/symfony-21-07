@@ -43,16 +43,17 @@ class DefaultController extends AbstractController
         Request $request,
         EntityManagerInterface $manager
     ): Response {
-        $article = new Article();
+        $article = (new Article())
+            ->setCreatedAt(new \DateTimeImmutable())
+        ;
 
         $form = $this->createForm(ArticleType::class, $article, [
-            'validation_groups' => ['DEFAULT', 'create'],
+            'validation_groups' => ['Default', 'create'],
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $article->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($article);
             $manager->flush();
 
