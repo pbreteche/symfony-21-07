@@ -1,0 +1,10 @@
+{% use 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block date_widget -%}
+    <span>Test theme</span>
+    {%- if widget != 'single_text' and not valid -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control is-invalid')|trim}) -%}
+        {% set valid = true %}
+    {%- endif -%}
+    {{- parent() -}}
+{%- endblock date_widget %}
