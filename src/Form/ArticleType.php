@@ -15,19 +15,25 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('body')
-            ->add('publishedAt', DateTimeType::class, [
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
-                'input'  => 'datetime_immutable',
-                'required' => false,
-            ])
         ;
+        if ($options['with_publishedAt_field']) {
+            $builder
+                ->add('publishedAt', DateTimeType::class, [
+                    'date_widget' => 'single_text',
+                    'time_widget' => 'single_text',
+                    'input'  => 'datetime_immutable',
+                    'required' => false,
+                ])
+            ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
-        ]);
+            'with_publishedAt_field' => true,
+        ])->setAllowedTypes('with_publishedAt_field', 'boolean')
+        ;
     }
 }

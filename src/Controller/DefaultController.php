@@ -78,6 +78,7 @@ class DefaultController extends AbstractController
     ): Response {
         $form = $this->createForm(ArticleType::class, $article, [
             'method' => 'PUT',
+            'with_publishedAt_field' => is_null($article->getPublishedAt()),
         ]);
 
         $form->handleRequest($request);
