@@ -41,6 +41,12 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $writtenBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,5 +112,17 @@ class Article
             !$this->publishedAt  ||
             $this->createdAt < $this->publishedAt
         ;
+    }
+
+    public function getWrittenBy(): ?Author
+    {
+        return $this->writtenBy;
+    }
+
+    public function setWrittenBy(?Author $writtenBy): self
+    {
+        $this->writtenBy = $writtenBy;
+
+        return $this;
     }
 }
