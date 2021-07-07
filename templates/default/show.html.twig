@@ -5,5 +5,14 @@
 {% block body %}
     <h1>{{ article.title }}</h1>
     <p>Écrit le {{ article.createdAt | date('d/m/Y') }} par {{ article.writtenBy.name }}</p>
+    <h2>Par défaut, échappement dans le langage courant</h2>
     <p>{{ article.body }}</p>
+    <h2>Possibilié d'échapper dans un langage spécifique</h2>
+    <p>{{ article.body | e('css') }}</p>
+    <h2>Ou pas d'échappement du tout</h2>
+    <p>{{ article.body | raw }}</p>
+
+    {% autoescape false %}
+    <p>Aucun échappement dans cette zone</p>
+    {% endautoescape %}
 {% endblock %}
