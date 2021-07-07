@@ -7,7 +7,7 @@
     <ul>
         {% for author in authors %}
             <li>
-                <a href="">{{ author.name }}</a>
+                <a href="{{ path('app_author_show', {id: author.id}) }}">{{ author.name }}</a>
             </li>
         {% else %}
             <li>Pas d'auteurs actuellement</li>
