@@ -4,6 +4,6 @@
 
 {% block body %}
     <h1>{{ article.title }}</h1>
-    <p>Écrit le {{ article.createdAt | date('d/m/Y') }}</p>
+    <p>Écrit le {{ article.createdAt | date('d/m/Y') }} par {{ article.writtenBy.name }}</p>
     <p>{{ article.body }}</p>
 {% endblock %}

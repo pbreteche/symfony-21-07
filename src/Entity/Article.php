@@ -42,7 +42,7 @@ class Article
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\ManyToOne(targetEntity=Author::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $writtenBy;
