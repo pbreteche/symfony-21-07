@@ -38,7 +38,7 @@ class Article
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", options={"default": "NOW()"})
      */
     private $createdAt;
 
