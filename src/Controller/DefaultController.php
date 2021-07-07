@@ -124,4 +124,22 @@ class DefaultController extends AbstractController
             'article' => $article,
         ]);
     }
+
+    /**
+     * @Route(
+     *     "/list/{month}",
+     *     requirements={"month": "\d{4}-\d{2}"},
+     *     defaults={"month": "this month"}
+     * )
+     */
+    public function indexByMonth(
+        \DateTimeImmutable $month,
+        ArticleRepository $repository
+    ): Response {
+        $articles = $repository->findByMonth($month);
+
+        return $this->render('default/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
 }

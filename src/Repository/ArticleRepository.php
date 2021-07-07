@@ -19,6 +19,21 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+     /**
+      * @return Article[] Returns an array of Article objects
+      */
+    public function findByMonth(\DateTimeImmutable $month)
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.publishedAt >= :first_day')
+            ->andWhere('article.publishedAt < :last_day')
+            ->getQuery()
+            ->setParameters([
+                'first_day' => $month->modify('first day of this month midnight'),
+                'last_day' => $month->modify('first day of next month midnight'),
+            ])->getResult();
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */
