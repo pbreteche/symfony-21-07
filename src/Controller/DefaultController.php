@@ -45,7 +45,9 @@ class DefaultController extends AbstractController
     ): Response {
         $article = new Article();
 
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article, [
+            'validation_groups' => ['DEFAULT', 'create'],
+        ]);
 
         $form->handleRequest($request);
 

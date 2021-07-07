@@ -32,7 +32,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
-     * @Assert\GreaterThanOrEqual(value="today")
+     * @Assert\GreaterThanOrEqual(value="today", groups={"create"})
      */
     private $publishedAt;
 
@@ -95,7 +95,10 @@ class Article
     }
 
     /**
-     * @Assert\IsTrue(message="La date de publication doit être ultérieure à la date de création")
+     * @Assert\IsTrue(
+     *     message="La date de publication doit être ultérieure à la date de création",
+     *     groups="create"
+     * )
      */
     public function isPublishedAfterCreated(): bool
     {
