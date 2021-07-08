@@ -1,5 +1,12 @@
 site_name: Mon super blog
 
+delete: Supprimer
+delete_something: Suppression de «{name}»
+
+flash:
+    creation_success: Création réussie
+
+
 article:
     name: Article
 

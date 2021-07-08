@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% set title = 'delete_something'|trans({name: article.title}) %}
+
 {% block body %}
-<h1>Suppression de {{ article.title }}</h1>
+<h1>{{ title }}</h1>
 
     <form method="post">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}"/>
-        <button type="submit">Supprimer</button>
+        <button type="submit">{{ 'delete'|trans }}</button>
     </form>
 {% endblock %}
 
-{% block title %}Suppression de {{ article.title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
