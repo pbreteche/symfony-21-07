@@ -1,0 +1,16 @@
+site_name: Mon super blog
+
+article:
+    name: Article
+
+    fields:
+        title: Titre
+        body: Corps
+        publishedAt: Publié le
+        writtenBy: Écrit par
+        createdAt: Créé le
+
+author:
+    name: Auteur
+
+    select_placeholder: Choisissez un auteur
