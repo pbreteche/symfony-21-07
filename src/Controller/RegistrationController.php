@@ -60,7 +60,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($user);
+            $manager->flush();
 
             return $this->redirectToRoute('app_default_index');
         }
