@@ -227,6 +227,9 @@
     "symfony/http-kernel": {
         "version": "v5.3.3"
     },
+    "symfony/intl": {
+        "version": "v5.3.0"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -418,6 +421,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.3.1"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.0"
     },
     "twig/twig": {
         "version": "v3.3.2"

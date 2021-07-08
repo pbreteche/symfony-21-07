@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>{{ article.title }}</h1>
-    <p>Écrit le {{ article.createdAt | date('d/m/Y') }} par {{ article.writtenBy.name }}</p>
+    <p>Écrit le {{ article.createdAt | format_date('short') }} par {{ article.writtenBy.name }}</p>
     <h2>Par défaut, échappement dans le langage courant</h2>
     <p>{{ article.body }}</p>
     <h2>Possibilié d'échapper dans un langage spécifique</h2>
