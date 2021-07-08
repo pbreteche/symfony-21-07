@@ -6,6 +6,13 @@ delete_something: Suppression de «{name}»
 flash:
     creation_success: Création réussie
 
+demo:
+    select: >-
+        {gender, select,
+            female {Message décliné au féminin}
+            male   {Message décliné au masculin}
+            other  {Message par défaut}
+        }
 
 article:
     name: Article
@@ -19,6 +26,12 @@ article:
     flash:
         creation_success: Vous avez créé un nouvel article
         deletion_success: 'Vous avez supprimé l''article'
+    plural: >-
+        {count, plural,
+            =0  {Pas d'articles}
+            one {Article}
+            other {Articles (#)}
+        }
 
 author:
     name: Auteur
