@@ -63,6 +63,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/{id}/remove", methods={"GET", "DELETE"})
+     * @IsGranted("ARTICLE_DELETE", subject="article")
      */
     public function remove(
         Article $article,
