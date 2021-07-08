@@ -17,6 +17,14 @@
     </head>
     <body>
         <a href="{{ path('app_default_index') }}">Accueil</a>
+        <div class="mb-3">
+            {% if app.user %}
+                <a href="{{ path('app_security_logout') }}">{{ app.user.userIdentifier }}</a>
+            {% else %}
+                <a href="{{ path('app_security_login') }}">Connexion</a>
+            {% endif %}
+        </div>
+
         {% block flash %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
