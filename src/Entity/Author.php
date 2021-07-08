@@ -27,6 +27,11 @@ class Author
      */
     private $email;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $authenticatedBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Author
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAuthenticatedBy(): ?User
+    {
+        return $this->authenticatedBy;
+    }
+
+    public function setAuthenticatedBy(?User $authenticatedBy): self
+    {
+        $this->authenticatedBy = $authenticatedBy;
 
         return $this;
     }
