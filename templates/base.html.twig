@@ -25,6 +25,8 @@
             {% endif %}
         </div>
 
+        <div>{{ render(controller('App\\Controller\\LocaleController::select')) }}</div>
+
         {% block flash %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}

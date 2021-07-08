@@ -1,0 +1,10 @@
+<form action="{{ path('app_locale_validate') }}" method="post">
+    <select name="locale" id="form-locale">
+        {% for language, locale in locales %}
+            <option value="{{ locale }}" {% if locale == app.request.locale %}selected{% endif %}>
+                {{ language }}
+            </option>
+        {% endfor %}
+    </select>
+    <button>{{ 'select_language'|trans }}</button>
+</form>

@@ -2,6 +2,7 @@ site_name: Mon super blog
 
 delete: Supprimer
 delete_something: Suppression de «{name}»
+select_language: Sélectionner la langue
 
 flash:
     creation_success: Création réussie
@@ -38,3 +39,6 @@ author:
     name: Auteur
 
     select_placeholder: Choisissez un auteur
+locale:
+    choice_error: 'La langue {language} n''est pas disponible'
+    choice_success: 'Vous avez sélectionné la langue {language}'

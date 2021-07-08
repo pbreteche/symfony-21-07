@@ -1,0 +1,44 @@
+site_name: My awesome blog
+
+delete: Delete
+delete_something: Delete "{name}"
+select_language: Select language
+
+flash:
+    creation_success: Creation succeeded
+
+demo:
+    select: >-
+        {gender, select,
+            female {Message décliné au féminin}
+            male   {Message décliné au masculin}
+            other  {Message par défaut}
+        }
+
+article:
+    name: Article
+
+    plural: >-
+        {count, plural,
+            =0  {Pas d'articles}
+            one {Article}
+            other {Articles (#)}
+        }
+
+    fields:
+        title: Title
+        body: Body
+        publishedAt: published at
+        writtenBy: Written by
+        createdAt: Created at
+    flash:
+        creation_success: You have created a new article
+        deletion_success: You have deleted an article
+
+author:
+    name: Auteur
+
+    select_placeholder: Choose an author
+locale:
+    choice_error: 'Language {language} is not available'
+    choice_success: 'You have selected {language} language'
