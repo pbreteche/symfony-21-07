@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserRoleFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +42,32 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/edit-user-roles/{id}", methods={"GET", "POST"})
+     */
+    public function editUserRoles(
+        User $user,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $form = $this->createForm(UserRoleFormType::class, $user, [
+            'validation_groups' => 'user_role'
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+
+            return $this->redirectToRoute('app_default_index');
+        }
+
+        return $this->renderForm('registration/edit_user_roles.html.twig', [
+            'form' => $form,
+            'user' => $user,
         ]);
     }
 }
