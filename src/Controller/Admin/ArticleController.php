@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/", methods="GET")
@@ -23,7 +24,8 @@ class ArticleController extends AbstractController
      */
     public function new(
         Request $request,
-        EntityManagerInterface $manager
+        EntityManagerInterface $manager,
+        TranslatorInterface $translator
     ): Response {
 
         // gestion du contrôle d'accès personnalisée
@@ -49,7 +51,7 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
-            $this->addFlash('success', 'Vous avez créé un nouvel article');
+            $this->addFlash('success', $translator->trans('article.flash.creation_success'));
 
             return $this->redirectToRoute('app_default_show', [
                 'id' => $article->getId(),
@@ -68,7 +70,8 @@ class ArticleController extends AbstractController
     public function remove(
         Article $article,
         Request $request,
-        EntityManagerInterface $manager
+        EntityManagerInterface $manager,
+        TranslatorInterface $translator
     ): Response {
         $user = $this->getUser();
 
@@ -86,7 +89,7 @@ class ArticleController extends AbstractController
             $manager->remove($article);
             $manager->flush();
 
-            $this->addFlash('success', 'Vous avez supprimez l\'article');
+            $this->addFlash('success', $translator->trans('article.flash.deletion_success'));
 
             return $this->redirectToRoute('app_default_index');
         }

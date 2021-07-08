@@ -9,6 +9,9 @@ article:
         publishedAt: Publié le
         writtenBy: Écrit par
         createdAt: Créé le
+    flash:
+        creation_success: Vous avez créé un nouvel article
+        deletion_success: 'Vous avez supprimé l''article'
 
 author:
     name: Auteur
