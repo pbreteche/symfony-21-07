@@ -1,0 +1,2 @@
+article:
+    title_min_length: Le titre {value} est trop court, il doit comporter au moins {limit} caractères.

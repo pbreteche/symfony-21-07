@@ -17,6 +17,13 @@ demo:
 article:
     name: Article
 
+    plural: >-
+        {count, plural,
+            =0  {Pas d'articles}
+            one {Article}
+            other {Articles (#)}
+        }
+
     fields:
         title: Titre
         body: Corps
@@ -24,14 +31,8 @@ article:
         writtenBy: Écrit par
         createdAt: Créé le
     flash:
-        creation_success: Vous avez créé un nouvel article
-        deletion_success: 'Vous avez supprimé l''article'
-    plural: >-
-        {count, plural,
-            =0  {Pas d'articles}
-            one {Article}
-            other {Articles (#)}
-        }
+        creation_success: Vous avez créé un nouvel article.
+        deletion_success: 'Vous avez supprimé l''article.'
 
 author:
     name: Auteur

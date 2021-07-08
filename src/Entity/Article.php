@@ -22,7 +22,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
-     * @Assert\Length(min=5, max=64)
+     * @Assert\Length(min=5, max=64, minMessage="article.title_min_length")
      */
     private $title;
 
