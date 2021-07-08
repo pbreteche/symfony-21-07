@@ -39,39 +39,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"GET", "POST"})
-     */
-    public function new(
-        Request $request,
-        EntityManagerInterface $manager
-    ): Response {
-        $article = (new Article())
-            ->setCreatedAt(new \DateTimeImmutable())
-        ;
-
-        $form = $this->createForm(ArticleType::class, $article, [
-            'validation_groups' => ['Default', 'create'],
-        ]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($article);
-            $manager->flush();
-
-            $this->addFlash('success', 'Vous avez créé un nouvel article');
-
-            return $this->redirectToRoute('app_default_show', [
-                'id' => $article->getId(),
-            ]);
-        }
-
-        return $this->renderForm('default/new.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", methods={"GET", "PUT"})
      */
     public function edit(
