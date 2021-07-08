@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        LoggerInterface $logger
+    ) {
         parent::__construct($registry, Article::class);
+        $this->logger = $logger;
     }
 
     /**
@@ -24,6 +34,8 @@ class ArticleRepository extends ServiceEntityRepository
     */
     public function findByMonth(\DateTimeImmutable $month)
     {
+        $this->logger->info('démo utilisation de dépendance');
+
         return $this->createQueryBuilder('article')
             ->andWhere('article.publishedAt >= :first_day')
             ->andWhere('article.publishedAt < :last_day')

@@ -7,6 +7,7 @@ use App\Entity\Author;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -144,6 +145,10 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/last/{id}")
+     * @Cache(expires="+1 hour")
+     */
     public function indexLast(Author $author, ArticleRepository $repository): Response
     {
         $articles = $repository->findBy(

@@ -4,7 +4,7 @@
     <h1>{{ author.name }}</h1>
     <p>{{ author.email }}</p>
 
-    {{ render(controller('App\\Controller\\DefaultController::indexLast', {author: author})) }}
+    {{ render_hinclude(path('app_default_indexlast', {id: author.id})) }}
 
 {% endblock %}
 
