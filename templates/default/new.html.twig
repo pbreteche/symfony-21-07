@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <p>Vous avez le rôle «ROLE_ADMIN»</p>
+    {% endif %}
+
     {{ include('default/_form.html.twig', {submit_label: 'Créer'}) }}
 {% endblock %}
