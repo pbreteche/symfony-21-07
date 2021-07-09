@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\Author;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,11 +18,6 @@ class ArticleType extends AbstractType
                 'label' => 'article.fields.title',
             ])
             ->add('body')
-            ->add('writtenBy', EntityType::class, [
-                'class' => Author::class,
-                'choice_label' => 'name',
-                'placeholder' => 'author.select_placeholder',
-            ])
         ;
         if ($options['with_publishedAt_field']) {
             $builder

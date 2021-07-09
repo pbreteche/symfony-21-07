@@ -39,6 +39,8 @@ author:
     name: Auteur
 
     select_placeholder: Choisissez un auteur
+    error:
+        missing: 'Merci ded créer un auteur'
 locale:
     choice_error: 'La langue {language} n''est pas disponible'
     choice_success: 'Vous avez sélectionné la langue {language}'

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,8 @@ class ArticleController extends AbstractController
     public function new(
         Request $request,
         EntityManagerInterface $manager,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        AuthorRepository $authorRepository
     ): Response {
 
         // gestion du contrôle d'accès personnalisée
@@ -37,8 +39,16 @@ class ArticleController extends AbstractController
         // ou version raccourcie
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        $author = $authorRepository->findOneBy(['authenticatedBy' => $user]);
+
+        if (!$author) {
+            $this->addFlash('error', $translator->trans('author.error.missing'));
+            return $this->redirectToRoute('app_default_index');
+        }
+
         $article = (new Article())
             ->setCreatedAt(new \DateTimeImmutable())
+            ->setWrittenBy($author)
         ;
 
         $form = $this->createForm(ArticleType::class, $article, [
