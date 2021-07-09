@@ -25,6 +25,8 @@
             {% endif %}
         </div>
 
+        <p>Langue actuelle: {{ static('Symfony\\Component\\Intl\\Languages::getName', app.request.locale) }}</p>
+
         <div>{{ render(controller('App\\Controller\\LocaleController::select')) }}</div>
 
         {% block flash %}
