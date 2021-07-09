@@ -37,19 +37,24 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
+     * @Cache(lastModified="article.getCreatedAt()")
      */
-    public function show(Article $article): Response
-    {
-        $response = $this->render('default/show.html.twig', [
-            'article' => $article,
-        ]);
+    public function show(
+        Article $article,
+        Request $request
+    ): Response {
+        $response = new Response();
 
-        $response->setMaxAge(1800)
-            ->setExpires(new \DateTimeImmutable('tomorrow'))
-            ->setPublic()
-            ->setLastModified($article->getPublishedAt())
-            ->headers->addCacheControlDirective('must-revalidate')
-        ;
+        $response->setLastModified($article->getCreatedAt());
+        $response->setPublic();
+
+        if ($response->isNotModified($request)) {
+            return $response;
+        }
+
+        $response->setContent($this->renderView('default/show.html.twig', [
+            'article' => $article,
+        ]));
 
         return $response;
     }
