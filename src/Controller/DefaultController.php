@@ -20,6 +20,13 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("")
+     * @Cache(
+     *     expires="+1 hour",
+     *     public=true,
+     *     maxage="3600",
+     *     smaxage="1800",
+     *     staleWhileRevalidate="120"
+     * )
      */
     public function index(ArticleRepository $repository): Response
     {
