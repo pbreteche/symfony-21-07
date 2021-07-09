@@ -7,6 +7,16 @@ use Symfony\Component\Intl\Languages;
 
 class AvailableLocales
 {
+    /**
+     * @var string
+     */
+    private $defaultLocale;
+
+    public function __construct(
+        string $defaultLocale
+    ) {
+        $this->defaultLocale = $defaultLocale;
+    }
 
     public function getAll()
     {
@@ -33,6 +43,6 @@ class AvailableLocales
 
     public function getDefault()
     {
-        return 'fr';
+        return $this->defaultLocale;
     }
 }
