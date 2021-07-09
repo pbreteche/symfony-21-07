@@ -40,9 +40,18 @@ class DefaultController extends AbstractController
      */
     public function show(Article $article): Response
     {
-        return $this->render('default/show.html.twig', [
+        $response = $this->render('default/show.html.twig', [
             'article' => $article,
         ]);
+
+        $response->setMaxAge(1800)
+            ->setExpires(new \DateTimeImmutable('tomorrow'))
+            ->setPublic()
+            ->setLastModified($article->getPublishedAt())
+            ->headers->addCacheControlDirective('must-revalidate')
+        ;
+
+        return $response;
     }
 
     /**
